@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de usuário</title>
+    <link rel="stylesheet" href="forms-style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form method="post" action="criar-viagem.php">
+        <h1>Compartilhe sua viagem</h1>
+        <p>
+          Nome:
+          <input type="text" name="nome" size="20" />
+          Telefone:
+          <input type="text" name="telefone" size="20" />
+        </p>
+        <p>
+          Cidade: <input type="text" name="cidade" size="20" /> Estado:
+          <input type="text" name="estado" size="2" maxlength="2" />
+        </p>
+        <p>
+          Partida:
+          <input type="text" name="partida" size="20" />
+          Chegada:
+          <input type="text" name="chegada" size="20" />
+        </p>
+        <p>
+          Horário:
+          <input type="text" name="horario" size="20" />
+          Tempo Estimado:
+          <input type="text" name="tempo-estimado" size="20" />
+        </p>
+        <p>
+          <input type="submit" name="enviar" value="Enviar" />
+          <input type="reset" value="Limpar" />
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
