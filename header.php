@@ -23,10 +23,7 @@
                 <h1><a href="?pagina=listar-viagens">Pegar Carona</a></h1>
             </li>
             <li>
-                <h1><a href="index.php?exit=true">Sair</a></h1>
-            </li>
-            <li>
-                <h1><a href="?pagina=login">Login</a></h1>
+                <h1><a href="?pagina=criar-usuario">Criar Cadastro</a></h1>
             </li>
         </ul>
     </div>

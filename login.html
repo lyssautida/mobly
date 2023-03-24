@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-Lyssa</title>
+    <link rel="stylesheet" href="login-style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div class="outside">
+        <div class="left">
+            <h1>
+                Faça seu login <br> e acesse a plataforma.
+            </h1>
+        </div>
+
+        <div class="main">
+    
+            <div class="title">
+                <h1>Login</h1>
+            </div>
+    
+            <div class="form">
+                <form action="authenticate.php" method="POST">
+                    <div class="input">
+                        <p><i class="ph-smiley"></i> E-mail</p> 
+                        <input type="text" name="email">
+                    </div>
+                    <div class="input">
+                        <p><i class="fa-light fa-lock"> Senha</i>
+                        </p>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="submit">
+                        <p>
+                            <a href="">Esqueci a Senha</a></p>
+                        <input type="submit" name="submit" value="ACESSAR">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

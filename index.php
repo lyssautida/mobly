@@ -11,6 +11,8 @@
         include "listar-viagens.php";
     } else if($pagina == "login") {
         include "login.html";
+    } else if($pagina == "criar-usuario") {
+        include "cadastro-usuario.html";
     } else {
         include 'home.php';
     }
