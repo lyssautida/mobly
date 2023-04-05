@@ -17,15 +17,15 @@
                 <h1><a href="?pagina=home">Home</a> </h1>
             </li>
             <li>
-                <h1><a href="?pagina=criar-viagem">Criar Viagem</a></h1>
+                <h1><a href="?pagina=criar-viagem">Cadastrar viagem</a></h1>
             </li>
             <li>
-                <h1><a href="?pagina=listar-viagens">Pegar Carona</a></h1>
+                <h1><a href="?pagina=listar-viagens">Listar viagens</a></h1>
             </li>
             <li>
-                <h1><a href="?pagina=criar-usuario">Criar Cadastro</a></h1>
+                <h1><a href="?pagina=criar-usuario">Cadastrar usuário</a></h1>
             </li>
         </ul>
     </div>
 </body>
-</html>
+</html> 
