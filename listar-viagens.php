@@ -11,38 +11,57 @@
           background-repeat: no-repeat;
         }
 
-        .lista {
+        .all {
           display: flex;
-          align-content: flex-end;
+
+        }
+
+        .lista {
+          align-content: end;
+          padding-left: 40%;
+
         }
       </style>
     </head>
     <body>
-      <div class="lista">
-      <?php
-        
-        #table
-        $table='<table border="1">'; //cria tabela
-        $table.='<thead>'; //abre cabeçalho
-        $table.='<tr>'; // abre linha
-        $table.='<th>Nome</th>'; // colunas do cabeçalho
-        $table.='<th>Saída</th>';
-        $table.='<th>Chegada</th>';
-        $table.='<th>Telefone</th>';
-        $table.='</tr>';                //fecha linha
-        $table.='</thead>';              //fecha cabeçalho
-        $table.='<tbody>'; //abre corpo da tabela
-        $table.='<tr>'; // abre linha
-        $table.='<td>Hideo</td>'; // coluna nome valor
-        $table.='<td>Cuiabá</td>';
-        $table.='<td>Londrina</td>';
-        $table.='<td>(65) 99812-5267</td>';
-        $table.='</tr>';                //fecha linha
-        $table.='</tbody>';             //fecha corpo da tabela
-        $table.='</table>';             //fecha tabela
-        echo $table;
-      ?>
+      <div class="all">
+        <div class="empty"></div>
+        <div class="lista">
+        <?php
+          session_start();
+
+          $_SESSION['viagem'];
+          require 'form-viagem.php';
+
+          
+          #table
+          $table='<table border="1">'; //cria tabela
+          $table.='<thead>'; //abre cabeçalho
+          $table.='<tr>'; // abre linha
+          $table.='<th>Nome</th>'; // colunas do cabeçalho
+          $table.='<th>Saída</th>';
+          $table.='<th>Horário</th>';
+          $table.='<th>Chegada</th>';
+          $table.='<th>Vagas</th>';
+          $table.='<th>Selecionar</th>';
+          $table.='</tr>';                //fecha linha
+          $table.='</thead>';              //fecha cabeçalho
+          $table.='<tbody>'; //abre corpo da tabela
+          $table.='<tr>'; // abre linha
+          $table.='<td>Lyssa</td>'; // coluna nome valor
+          $table.='<td>Cuiabá</td>';
+          $table.='<td>6:00 AM</td>';   
+          $table.='<td>Londrina</td>';
+          $table.='<td>3</td>';
+          $table.='<td><input type="checkbox" name="travel" /></td>';
+          $table.='</tr>';                //fecha linha
+          $table.='</tbody>';             //fecha corpo da tabela
+          $table.='</table>';             //fecha tabela
+          echo $table;
+s          ?>
+        </div>
       </div>
     </body>
-
-</html>
+    
+    </html>
+    

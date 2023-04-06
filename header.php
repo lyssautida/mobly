@@ -23,7 +23,7 @@
                 <h1><a href="?pagina=listar-viagens">Listar viagens</a></h1>
             </li>
             <li>
-                <h1><a href="?pagina=criar-usuario">Cadastrar usuário</a></h1>
+                <h1><a href="index.php?exit=true">Sair</a></h1>
             </li>
         </ul>
     </div>

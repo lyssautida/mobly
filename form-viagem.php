@@ -10,24 +10,39 @@
   <body>
     
     <?php
+      session_start();
 
-    $nome       = $_POST['nome'];
-    $telefone   = $_POST['telefone'];
-    $cidade     = $_POST['cidade'];
-    $estado     = $_POST['estado'];
-    $partida    = $_POST['partida'];
-    $estado     = $_POST['estado'];
-    $erro       = FALSE;
 
-    echo "<b>Nome: </b>" .$_POST['nome']. "<br>";
-    echo "<b>Telefone: </b>" .$_POST['telefone']. "<br>";
-    echo "<b>Partida: </b>" .$_POST['partida']. "<br>";
-    echo "<b>Cidade: </b>" .$_POST['cidade']. "<br>";
-    echo "<b>Estado: </b>" .$_POST['estado']. "<br>";
+      $nome       = $_POST['nome'];
+      $telefone   = $_POST['telefone'];
+      $cidade     = $_POST['cidade'];
+      $estado     = $_POST['estado'];
+      $partida    = $_POST['partida'];
+      $estado     = $_POST['estado'];
+      $vagas      = $_POST['vagas'];
+      $erro       = FALSE;
+
+      $viagem = [
+        'nome' => $nome, 
+        'telefone' => $telefone,
+        'cidade' => $cidade,
+        'estado' => $estado,
+        'partida' => $partida,
+        'vagas' => $vagas,
+      ];
+      
+      $_SESSION['viagem'] = $viagem;
+
+      echo "<b>Nome: </b>" .$_SESSION['viagem']['nome']. "<br>";
+      echo "<b>Telefone: </b>" .$_SESSION['viagem']['telefone']. "<br>";
+      echo "<b>Partida: </b>" .$_SESSION['viagem']['partida']. "<br>";
+      echo "<b>Cidade: </b>" .$_SESSION['viagem']['cidade']. "<br>";
+      echo "<b>Estado: </b>" .$_SESSION['viagem']['estado']. "<br>";
+      echo "<b>Vagas: </b>" .$_SESSION['viagem']['vagas']. "<br>";
 
     ?>
     <button>
-      <a href="?pagina=home">Voltar</a>
+      <a href="index.php">Voltar</a>
     </button>
   </body>
 </html>
