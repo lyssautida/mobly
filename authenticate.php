@@ -5,8 +5,8 @@
 
     session_regenerate_id();
 
-    $user_default     = "admin@fatec.com.br";
-    $password_default = "fatec";
+    $user_default     = "lyssautida";
+    $password_default = "12345678";
 
     $user_typed     = $_POST["email"];
     $password_typed = $_POST["password"];
