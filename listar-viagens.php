@@ -58,7 +58,7 @@
           $table.='</tbody>';             //fecha corpo da tabela
           $table.='</table>';             //fecha tabela
           echo $table;
-s          ?>
+         ?>
         </div>
       </div>
     </body>
