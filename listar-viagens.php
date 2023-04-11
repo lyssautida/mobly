@@ -9,23 +9,32 @@
         body {
           background-image: url('https://images.unsplash.com/photo-1520466809213-7b9a56adcd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="smiling-traveler-girl-on-a-large-city-avenue');
           background-repeat: no-repeat;
+          background-color: aliceblue;
         }
 
         .all {
-          display: flex;
-
+         
+          width: 50%;
+          margin-left: 50%;
+          padding: 1rem;
         }
 
         .lista {
           align-content: end;
-          padding-left: 40%;
+          padding: 2rem;
         }
       </style>
     </head>
     <body>
       <div class="all">
+        <h1>Listagem de viagens</h1>
+        <h3>Selecione a viagem que gostaria de fazer</h3>
         <div class="empty"></div>
         <div class="lista">
+          <form action="get">
+
+
+          </form>
         <?php
           if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -55,11 +64,32 @@
           $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
           $table.='<td><input type="checkbox" name="travel" /></td>';
           $table.='</tr>';                //fecha linha
+          $table.='<tr>'; // abre linha
+          $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
+          $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
+          $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
+          $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
+          $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
+          $table.='<td><input type="checkbox" name="travel" /></td>';
+          $table.='</tr>';                //fecha linha
+          $table.='<tr>'; // abre linha
+          $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
+          $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
+          $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
+          $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
+          $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
+          $table.='<td><input type="checkbox" name="travel" /></td>';
+          $table.='</tr>';                //fecha linha
           $table.='</tbody>';             //fecha corpo da tabela
           $table.='</table>';             //fecha tabela
-          echo $table;
-        ?>
 
+          if($_SESSION['viagem'] != null) {
+            echo $table;
+          } else {
+            echo "Não há viagens na lista ainda.";
+          }
+          
+        ?>
         </div>
       </div>
     </body>

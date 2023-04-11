@@ -53,7 +53,7 @@
       ?>
 
       <div class='button'>
-        <a href="index.php">Voltei</a>
+        <a href="index.php">Voltar</a>
       </div class='button'>
     </div>
   </body>
