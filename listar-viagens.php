@@ -31,15 +31,14 @@
         <h3>Selecione a viagem que gostaria de fazer</h3>
         <div class="empty"></div>
         <div class="lista">
-          <form action="get">
+          <form action="checkout.php" method="get" >
 
 
-          </form>
-        <?php
+            <?php
           if (session_status() == PHP_SESSION_NONE) {
             session_start();
           }
-
+          
           $_SESSION['viagem'];
           //require 'form-viagem.php';
           
@@ -62,7 +61,7 @@
           $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
           $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
           $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
-          $table.='<td><input type="checkbox" name="travel" /></td>';
+          $table.='<td>'.'<input type="checkbox" name="travel01" />'.'</td>';
           $table.='</tr>';                //fecha linha
           $table.='<tr>'; // abre linha
           $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
@@ -70,7 +69,7 @@
           $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
           $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
           $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
-          $table.='<td><input type="checkbox" name="travel" /></td>';
+          $table.='<td>'.'<input type="checkbox" name="travel02" />'.'</td>';
           $table.='</tr>';                //fecha linha
           $table.='<tr>'; // abre linha
           $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
@@ -78,7 +77,7 @@
           $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
           $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
           $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
-          $table.='<td><input type="checkbox" name="travel" /></td>';
+          $table.='<td>'.'<input type="checkbox" name="travel03" />'.'</td>';
           $table.='</tr>';                //fecha linha
           $table.='</tbody>';             //fecha corpo da tabela
           $table.='</table>';             //fecha tabela
@@ -89,7 +88,9 @@
             echo "Não há viagens na lista ainda.";
           }
           
-        ?>
+          ?>
+          <input type="submit" value="Escolher">
+        </form>
         </div>
       </div>
     </body>
