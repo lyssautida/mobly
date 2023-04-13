@@ -7,8 +7,12 @@
     <title>Home</title>
     <style>
         body {
-            background-image: url(https://images.unsplash.com/photo-1490430657723-4d607c1503fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);
+            background-image: url("https://images.unsplash.com/photo-1446160657592-4782fb76fb99?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80");
+            background-repeat: no-repeat;
+            background-position: 10%;
+            background-size: clip;        
         }
+
         .container {
             display:flex;
             width:70%;
