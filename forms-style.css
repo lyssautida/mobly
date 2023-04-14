@@ -23,19 +23,21 @@ form p {
 }
 
 form input[type="submit"] {
-  padding: 0.5rem 2rem;
-  border: 0 0.5px rgb(129, 36, 24);
-  cursor: pointer;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  margin-top: 2rem;
+  border: 0;
+  background: rgb(92, 132, 132);
+  padding: 1rem 3rem;
+  border-radius: 20px;
+  vertical-align: middle;
 }
 
 form input[type="reset"] {
-  padding: 0.5rem 2rem;
-  border: 0 0.5px rgb(129, 36, 24);
-  cursor: pointer;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  margin-top: 2rem;
+  border: 0;
+  background: rgb(92, 132, 132);
+  padding: 1rem 3rem;
+  border-radius: 20px;
+  vertical-align: middle;
 }
 
 

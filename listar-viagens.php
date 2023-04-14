@@ -13,7 +13,6 @@
         }
 
         .all {
-         
           width: 50%;
           margin-left: 50%;
           padding: 1rem;
@@ -23,6 +22,16 @@
           align-content: end;
           padding: 2rem;
         }
+
+        form input[type="submit"] {
+          margin-top: 2rem;
+          border: 0;
+          background: rgb(92, 132, 132);
+          padding: 1rem 3rem;
+          border-radius: 20px;
+          vertical-align: middle;
+        }
+        
       </style>
     </head>
     <body>
