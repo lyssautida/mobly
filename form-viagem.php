@@ -1,96 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="forms-style.css">
-    <title>cadastro viagem</title>
-    <style>
-        body {
-          background-image: url('https://images.unsplash.com/photo-1520466809213-7b9a56adcd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="smiling-traveler-girl-on-a-large-city-avenue');
-          background-repeat: no-repeat;  
-        }
 
-        .res {
-          width: 100vw;
-          height: 100vh;  
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
+<?php
+session_start();
+$_SESSION['logged_user'];
 
-        
-        .button {
-          margin-top: 2rem;
-          border: 0;
-          background: rgb(92, 132, 132);
-          padding: 1rem 3rem;
-          border-radius: 20px;
-          vertical-align: middle;
-        }
+$user_id          = $_SESSION['logged_user']['id'];
+$local_partida    = $_POST['local_partida'];
+$local_destino    = $_POST['local_destino'];
+$data_partida     = $_POST['data_partida'];
+$data_destino     = $_POST['data_destino'];
+$vagas            = $_POST['vagas'];
+$erro             = FALSE;
 
-        .button:hover {
-          border-top-color: #8b80b8;
-          background: #8b80b8;
-          color: #75959c;
-        }
+if(empty($user_id )) {
+  echo "<b>Motorista</b> é obrigatório"; 
+  $erro = TRUE;
+}
 
-        .button a {
-          text-decoration: underline;
-          font-weight: 700;
-          color: #604e79;
-        }
-    </style>
-  </head>
-  <body>
-    <div class="res">
+if(empty($local_partida )) {
+  echo "<b>Local de partida</b> é obrigatório"; 
+  $erro = TRUE;
+}
 
-      <?php
-        session_start();
+if(empty($local_destino )) {
+  echo "<b>Local destino</b> é obrigatório"; 
+  $erro = TRUE;
+}
 
-        $nome       = $_POST['nome'];
-        $telefone   = $_POST['telefone'];
-        $cidade     = $_POST['cidade'];
-        $estado     = $_POST['estado'];
-        $partida    = $_POST['partida'];
-        $horario    = $_POST['horario'];
-        $destino    = $_POST['destino'];
-        $vagas      = $_POST['vagas'];
-        $erro       = FALSE;
+if(empty($data_partida )) {
+  echo "<b>data_partida</b> é obrigatório"; 
+  $erro = TRUE;
+}
 
-        if(!$erro) {
-          echo '<h1>Viagem Cadastrada com sucesso!</h1>';
-          echo '<h3> Agora é só esperar passageiros Mobly juntar-se a você.</h3>';
-        }
+if(empty($data_destino )) {
+  echo "<b>data_destino</b> é obrigatório"; 
+  $erro = TRUE;
+}
 
-        $viagem = [
-          'nome'      => $nome,
-          'telefone'  => $telefone,
-          'cidade'    => $cidade,
-          'estado'    => $estado,
-          'partida'   => $partida,
-          'vagas'     => $vagas,
-          'horario'   => $horario,
-          'destino'   => $destino,
-        ];
-        
-        $_SESSION['viagem'] = $viagem;
+if(empty($vagas )) {
+  echo "<b>Vagas</b> é obrigatório"; 
+  $erro = TRUE;
+}
 
-        echo "Nome: " .$_SESSION['viagem']['nome']. "<br>";
-        echo "Telefone: " .$_SESSION['viagem']['telefone']. "<br>";
-        echo "Horário: " .$_SESSION['viagem']['horario']. "<br>";
-        echo "Partida: " .$_SESSION['viagem']['partida']. "<br>";
-        echo "Destino: " .$_SESSION['viagem']['destino']. "<br>";
-        echo "Cidade: " .$_SESSION['viagem']['cidade']. "<br>";
-        echo "Estado: " .$_SESSION['viagem']['estado']. "<br>";
-        echo "Vagas: " .$_SESSION['viagem']['vagas']. "<br>";
-      ?>
+$viagem = [
+  'nome'            => $user_id,
+  'local_partida '  => $local_partida ,
+  'local_destino'   => $local_destino,
+  'data_partida'    => $data_partida,
+  'data_destino'    => $data_destino,
+  'vagas'           => $vagas,
+];
 
-      <div class='button'>
-        <a href="index.php">Voltar</a>
-      </div class='button'>
-    </div>
-  </body>
-</html>
+$_SESSION['viagem'] = $viagem;
+
+if(!$erro) {
+  $host     = "localhost:3308";
+  $database = "mobly";
+  $user     = "root";
+  $password = "";
+
+  // 1- função PDO instancia do banco de dados
+  //verificar user em explorer>phpmyadmin>config.inc
+  //url do banco, nome do banco, user, password
+  $conexao =  new PDO(
+      "mysql:host=$host;
+      dbname=$database",
+    $user,
+    $password
+  );
+
+  // 2- variável sql recebe um comando insert, select ou query
+  // insert into precisa ter os nomes da colunas do banco, values pode passar qualquer nome  
+  $sql = "INSERT INTO trips (user_id, local_partida, local_destino, data_partida, data_partida, vagas)
+          VALUES (:user_id, :local_partida, :local_destino, :data_partida, :data_partida, :vagas)";
+
+  // 3- statment vai preparar a query
+  $stmt = $conexao -> prepare($sql);
+
+
+  // 4- statment vai relacionar os parâmetros com os valores dinâmicos da variáveis do form
+  $stmt -> bindValue(':user_id', $user_id);
+  $stmt -> bindValue(':local_partida', $local_partida);
+  $stmt -> bindValue(':local_destino', $local_destino);
+  $stmt -> bindValue(':data_partida', $data_partida);
+  $stmt -> bindValue(':data_partida', $data_partida);
+  $stmt -> bindValue(':vagas', $vagas);
+
+  // 5- executar statment
+  $stmt->execute();
+
+  header("Location: sucesso.html");
+
+  // 6- fecha conexão
+  exit;
+}
+
+  
