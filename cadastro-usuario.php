@@ -1,75 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cadastro usuário</title>
-    <style>
-        body {
-          background-image: url('https://images.unsplash.com/photo-1520466809213-7b9a56adcd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="smiling-traveler-girl-on-a-large-city-avenue');
-          background-repeat: no-repeat;  
-        }
 
-        .res {
-          width: 100vw;
-          height: 90vh;  
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
+<?php
+  $email             = $_POST['email'];
+  $senha             = $_POST['senha'];
+  $senhaConfirmacao  = $_POST['senhaConfirmacao'];
+  $nome              = $_POST['nome'];
+  $telefone          = $_POST['telefone'];
+  $cidade            = $_POST['cidade'];
+  $estado            = $_POST['estado'];
+  $erro              = FALSE;
 
-        
-        .button {
-        border: 0;
-        background: rgb(92, 132, 132);
-        padding: 9px 18px;
-        border-radius: 15px;
-        vertical-align: middle;
-        width: 4rem;
-        }
+  if(empty($nome)) {
+    echo "<b>Nome</b> é obrigatório"; 
+    $erro = TRUE;
+  }
 
-        .button:hover {
-        border-top-color: #8b80b8;
-        background: #8b80b8;
-        color: #75959c;
-        }
+  if(empty($email)) {
+    echo "<b>Email</b> é obrigatório"; 
+    $erro = TRUE;
+  }
 
-        .button a {
-        text-decoration: underline;
-        font-weight: 700;
-        color: #604e79;
-        }
-    </style>
-  </head>
-  <body>
-    <div class="res">
+  if(empty($telefone)) {
+    echo "<b>telefone</b> é obrigatório"; 
+    $erro = TRUE;
+  }
 
-      <?php
-        $email      = $_POST['email'];
-        $senha      = $_POST['senha'];
-        $nome       = $_POST['nome'];
-        $telefone   = $_POST['telefone'];
-        $cidade     = $_POST['cidade'];
-        $estado     = $_POST['estado'];
-        $erro       = FALSE;
-        
-        if(!$erro) {
-          echo '<h1>Cadastro realizado com sucesso!</h1>';
-          echo '<h3> Comece a usar Mobly agora.</h3>';
-        }
+  if(empty($cidade)) {
+    echo "<b>Cidade</b> é obrigatório"; 
+    $erro = TRUE;
+  }
+  
+  if(empty($estado)) {
+    echo "<b>Estado</b> é obrigatório"; 
+    $erro = TRUE;
+  }
 
-        echo "<b>Nome: </b>" .$_POST['nome']. "<br>";
-        echo "<b>Usuário: </b>" .$_POST['email']. "<br>";
-        echo "<b>Telefone: </b>" .$_POST['telefone']. "<br>";
-        echo "<b>Cidade: </b>" .$_POST['cidade']. "<br>";
-        echo "<b>Estado: </b>" .$_POST['estado']. "<br><br>";
-      ?>
+  if(!strstr($senha, $senha2)) {
+    echo "As senhas devem ser iguais";
+    $erro = TRUE;
+  }
 
-      <div class='button'>
-        <a href="index.php">Começar</a>
-      </div class='button'>
-    </div>
-  </body>
-</html>
+  if(strstr($senha, ' ')) {
+    echo "<b>Senha</b> não pode conter espaços";
+    $erro = TRUE;
+  }
+
+  if(!strstr($email, '@')) {
+    echo "<b>Email</b> inválido. Deve conter '@'";
+    $erro = TRUE;
+  }
+
+
+  if(!$erro) {
+    $host     = "localhost:3308";
+    $database = "mobly";
+    $user     = "root";
+    $password = "";
+
+    // 1- função PDO instancia do banco de dados
+    //verificar user em explorer>phpmyadmin>config.inc
+    //url do banco, nome do banco, user, password
+    $conexao =  new PDO(
+        "mysql:host=$host;
+        dbname=$database",
+      $user,
+      $password
+    );
+
+    // 2- variável sql recebe um comando insert, select ou query
+    // insert into precisa ter os nomes da colunas do banco, values pode passar qualquer nome  
+    $sql = "INSERT INTO users (nome, email, senha, telefone, cidade, estado)
+            VALUES (:nome, :email, :senha, :telefone, :cidade, :estado)";
+
+    // 3- statment vai preparar a query
+    $stmt = $conexao -> prepare($sql);
+
+
+    // 4- statment vai relacionar os parâmetros com os valores dinâmicos da variáveis do form
+    $stmt -> bindValue(':nome', $nome);
+    $stmt -> bindValue(':email', $email);
+    $stmt -> bindValue(':senha', $senha);
+    $stmt -> bindValue(':telefone', $telefone);
+    $stmt -> bindValue(':cidade', $cidade);
+    $stmt -> bindValue(':estado', $estado);
+
+    // 5- executar statment
+    $stmt->execute();
+
+    header("Location: sucesso.html");
+
+    // 6- fecha conexão
+    exit;
+  }
+
+?>
