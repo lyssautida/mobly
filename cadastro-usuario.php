@@ -51,20 +51,12 @@
 
 
   if(!$erro) {
+    include "conexao.php";
+
     $host     = "localhost:3308";
     $database = "mobly";
     $user     = "root";
     $password = "";
-
-    // 1- função PDO instancia do banco de dados
-    //verificar user em explorer>phpmyadmin>config.inc
-    //url do banco, nome do banco, user, password
-    $conexao =  new PDO(
-        "mysql:host=$host;
-        dbname=$database",
-      $user,
-      $password
-    );
 
     // 2- variável sql recebe um comando insert, select ou query
     // insert into precisa ter os nomes da colunas do banco, values pode passar qualquer nome  
