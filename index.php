@@ -1,7 +1,8 @@
 <?php  
     session_start();
+
     //isset verifica se tem algo dentro e retorna true
-    if(!isset($_SESSION["logged_user"])) {
+   if(!isset($_SESSION["logged_user"])) {
         header("Location: login.html");
     }
     
@@ -23,8 +24,6 @@
     } else {
         include 'home.php';
     }
-    
-    include 'footer.php';
-    
-    
+
+    include 'footer.php';    
 ?>

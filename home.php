@@ -17,7 +17,7 @@
             display:flex;
             width:70%;
             margin: 0 15rem;
-            padding-bottom: 15rem;
+            padding-bottom: 8rem;
             justify-content: center;
             background:rgb(0,0,0);
             background: transparent\9;
@@ -112,5 +112,8 @@
             </ul>
         </div>
     </div>
+    <?php
+        include 'listar-usuario.php';
+    ?>
 </body>
 </html>

@@ -32,9 +32,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Código</th>
-            <th>Nome</th>
-            <th>Estado</th>
+            <th>Obrigada por se cadastrarem!</th>
           </tr>
         </thead>
         
@@ -52,8 +50,7 @@
           ?>
 
           <tr>
-            <td scope="row"><?php echo $id; ?></td>
-            <td            ><?php echo $nome; ?></td>
+            <td scope="row"><?php echo $nome; ?></td>
             <td            ><?php echo $estado; ?></td>
           </tr>
 
