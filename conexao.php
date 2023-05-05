@@ -1,4 +1,8 @@
 <?php
+  $host     = "localhost:3308";
+  $database = "mobly";
+  $user     = "root";
+  $password = "";
   // 1- função PDO instancia do banco de dados
   //verificar user em explorer>phpmyadmin>config.inc
   //url do banco, nome do banco, user, password
