@@ -7,8 +7,10 @@ $user_id          = $_SESSION['logged_user']['id'];
 $local_partida    = $_POST['local_partida'];
 $local_destino    = $_POST['local_destino'];
 $data_partida     = $_POST['data_partida'];
+$hora_partida     = $_POST['hora_partida'];
 $data_destino     = $_POST['data_destino'];
 $vagas            = $_POST['vagas'];
+$is_passenger     = FALSE;
 $erro             = FALSE;
 
 if(empty($user_id )) {
@@ -31,6 +33,11 @@ if(empty($data_partida )) {
   $erro = TRUE;
 }
 
+if(empty($hora_partida )) {
+  echo "<b>hora_partida</b> é obrigatório"; 
+  $erro = TRUE;
+}
+
 if(empty($data_destino )) {
   echo "<b>data_destino</b> é obrigatório"; 
   $erro = TRUE;
@@ -42,13 +49,17 @@ if(empty($vagas )) {
 }
 
 $viagem = [
-  'nome'            => $user_id,
+  'user_id'         => $user_id,
   'local_partida '  => $local_partida ,
   'local_destino'   => $local_destino,
   'data_partida'    => $data_partida,
+  'hora_partida'    => $hora_partida,
   'data_destino'    => $data_destino,
+  'is_passenger'    => $is_passenger,
   'vagas'           => $vagas,
 ];
+
+// var_dump($viagem);
 
 $_SESSION['viagem'] = $viagem;
 
@@ -70,8 +81,10 @@ if(!$erro) {
 
   // 2- variável sql recebe um comando insert, select ou query
   // insert into precisa ter os nomes da colunas do banco, values pode passar qualquer nome  
-  $sql = "INSERT INTO trips (user_id, local_partida, local_destino, data_partida, data_partida, vagas)
-          VALUES (:user_id, :local_partida, :local_destino, :data_partida, :data_partida, :vagas)";
+  $sql = "INSERT INTO trips (local_partida, local_destino, data_partida, hora_partida, data_destino, vagas)
+          VALUES (:local_partida, :local_destino, :data_partida, :hora_partida, :data_destino, :vagas)";
+         "INSERT INTO user_trips (user_id, trip_id, is_passenger)
+          VALUES (:user_id, :trip_id, :is_passenger)";
 
   // 3- statment vai preparar a query
   $stmt = $conexao -> prepare($sql);

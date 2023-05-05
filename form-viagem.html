@@ -14,20 +14,6 @@
         <h4>
           Compartilhe assentos da sua viagem e dê carona para ganhar uma grana
         </h4>
-        <!--TODO: fazer busca no banco para:
-          pegar dados do usuário logado
-          disponibilizar dados usuário tela
-          enviar user_id no fromulário--> 
-        <p>
-          Nome:
-          <input type="text" name="nome" size="20" />
-          Telefone:
-          <input type="text" name="telefone" size="20" />
-        </p>
-        <p>
-          Cidade: <input type="text" name="cidade" size="20" /> Estado:
-          <input type="text" name="estado" size="2" maxlength="2" />
-        </p>
         <p>
           Local de Partida:
           <input type="text" name="local_partida" size="20" />
@@ -36,13 +22,17 @@
         </p>
         <p>
           Data de Partida:
-          <input type="text" name="data_partida" size="20" />
+          <input type="date" name="data_partida" size="20" />
+          Hora de Partida:
+          <input type="time" name="hora_partida" size="20" />
+        </p>
+        <p>
           Data de Chegada:
-          <input type="text" name="data_destino" size="20" />
+          <input type="date" name="data_destino" size="20" />
         </p>
         <p>
           Vagas:
-          <input type="text" name="vagas" size="2" />
+          <input type="number" name="vagas" size="2" />
         </p>
         <p>
           <input type="submit" name="enviar" value="Enviar" />
