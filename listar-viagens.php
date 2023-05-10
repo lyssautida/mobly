@@ -1,3 +1,28 @@
+<?php
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+  }
+
+  // 1- importar conexao com banco
+  include "conexao.php";
+
+  // 2- variável sql recebe um comando insert, select ou query
+  // insert into precisa ter os nomes da colunas do banco, values pode passar qualquer nome  
+  $buscar_cadastros = "SELECT * FROM trips, user_trips, users 
+                      WHERE user_trips.user_id = user.id
+                      WHERE user_trips.trip_id = trip.id"
+
+  // 3- statment vai preparar a query
+  $stmt = $conexao -> prepare($buscar_cadastros);
+
+  // 4- executar statment
+  $stmt->execute();
+
+  // 5- receber os dados do statment
+  $receber_cadastros = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+  var_dump($receber_cadastros);
+?>
+ 
 <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -44,60 +69,66 @@
 
 
             <?php
-          if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-          }
-          
-          $_SESSION['viagem'];
-          //require 'form-viagem.php';
-          
-          #table
-          $table='<table border="1">'; //cria tabela
-          $table.='<thead>'; //abre cabeçalho
-          $table.='<tr>'; // abre linha
-          $table.='<th>Nome</th>'; // colunas do cabeçalho
-          $table.='<th>Partida</th>';
-          $table.='<th>Horário</th>';
-          $table.='<th>Destino</th>';
-          $table.='<th>Vagas</th>';
-          $table.='<th>Selecionar</th>';
-          $table.='</tr>';                //fecha linha
-          $table.='</thead>';              //fecha cabeçalho
-          $table.='<tbody>'; //abre corpo da tabela
-          $table.='<tr>'; // abre linha
-          $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
-          $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
-          $table.='<td>'.'<input type="checkbox" name="travel01" />'.'</td>';
-          $table.='</tr>';                //fecha linha
-          $table.='<tr>'; // abre linha
-          $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
-          $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
-          $table.='<td>'.'<input type="checkbox" name="travel02" />'.'</td>';
-          $table.='</tr>';                //fecha linha
-          $table.='<tr>'; // abre linha
-          $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
-          $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
-          $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
-          $table.='<td>'.'<input type="checkbox" name="travel03" />'.'</td>';
-          $table.='</tr>';                //fecha linha
-          $table.='</tbody>';             //fecha corpo da tabela
-          $table.='</table>';             //fecha tabela
+              
+              $_SESSION['viagem'];
+              //require 'form-viagem.php';
 
-          if($_SESSION['viagem'] != null) {
-            echo $table;
-          } else {
-            echo "Não há viagens na lista ainda.";
-          }
-          
-          ?>
+              foreach($receber_cadastros as $item) {
+                $id       = $item['id'];
+                $nome     = $item['nome'];
+                $email    = $item['email'];
+                $telefone = $item['telefone'];
+                $cidade   = $item['cidade'];
+                $estado   = $item['estado'];
+                
+                #table
+                $table='<table border="1">'; //cria tabela
+                $table.='<thead>'; //abre cabeçalho
+                $table.='<tr>'; // abre linha
+                $table.='<th>Nome</th>'; // colunas do cabeçalho
+                $table.='<th>Partida</th>';
+                $table.='<th>Horário</th>';
+                $table.='<th>Destino</th>';
+                $table.='<th>Vagas</th>';
+                $table.='<th>Selecionar</th>';
+                $table.='</tr>';                //fecha linha
+                $table.='</thead>';              //fecha cabeçalho
+                $table.='<tbody>'; //abre corpo da tabela
+                $table.='<tr>'; // abre linha
+                $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
+                $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
+                $table.='<td>'.'<input type="checkbox" name="travel01" />'.'</td>';
+                $table.='</tr>';                //fecha linha
+                $table.='<tr>'; // abre linha
+                $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
+                $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
+                $table.='<td>'.'<input type="checkbox" name="travel02" />'.'</td>';
+                $table.='</tr>';                //fecha linha
+                $table.='<tr>'; // abre linha
+                $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
+                $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
+                $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
+                $table.='<td>'.'<input type="checkbox" name="travel03" />'.'</td>';
+                $table.='</tr>';                //fecha linha
+                $table.='</tbody>';             //fecha corpo da tabela
+                $table.='</table>';             //fecha tabela
+              }
+
+              if($_SESSION['viagem'] != null) {
+                echo $table;
+              } else {
+                echo "Não há viagens na lista ainda.";
+              }
+            
+            ?>
           <input type="submit" value="Escolher">
         </form>
         </div>
