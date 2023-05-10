@@ -59,7 +59,7 @@ $viagem = [
   'vagas'           => $vagas,
 ];
 
-// var_dump($viagem);
+var_dump($viagem);
 
 $_SESSION['viagem'] = $viagem;
 
@@ -79,15 +79,18 @@ if(!$erro) {
     $password
   );
 
+  //to-do lançar exceção no erro de conexão
+
+
   // 2- variável sql recebe um comando insert, select ou query
   // insert into precisa ter os nomes da colunas do banco, values pode passar qualquer nome  
-  $sql = "INSERT INTO trips (local_partida, local_destino, data_partida, hora_partida, data_destino, vagas)
-          VALUES (:local_partida, :local_destino, :data_partida, :hora_partida, :data_destino, :vagas)";
-         "INSERT INTO user_trips (user_id, trip_id, is_passenger)
+  $sql_trip = "INSERT INTO trips (local_partida, local_destino, data_partida, hora_partida, data_destino, vagas)
+          VALUES (:local_partida, :local_destino, :data_partida, :hora_partida, :data_destino, :vagas);
+          INSERT INTO user_trips (user_id, trip_id, is_passenger)
           VALUES (:user_id, :trip_id, :is_passenger)";
 
-  // 3- statment vai preparar a query
-  $stmt = $conexao -> prepare($sql);
+// 3- statment vai preparar a query
+  $stmt = $conexao -> prepare($sql_trip);
 
 
   // 4- statment vai relacionar os parâmetros com os valores dinâmicos da variáveis do form
@@ -95,11 +98,18 @@ if(!$erro) {
   $stmt -> bindValue(':local_partida', $local_partida);
   $stmt -> bindValue(':local_destino', $local_destino);
   $stmt -> bindValue(':data_partida', $data_partida);
-  $stmt -> bindValue(':data_partida', $data_partida);
+  $stmt -> bindValue(':hora_partida', $hora_partida);
+  $stmt -> bindValue(':data_destino', $data_destino);
+  $stmt -> bindValue(':vagas', $vagas);
+  $stmt -> bindValue(':trip_id', $trip_id);
+  $stmt -> bindValue(':is_passenger', $is_passenger);
   $stmt -> bindValue(':vagas', $vagas);
 
   // 5- executar statment
   $stmt->execute();
+
+  //pegar ultimo id criado
+  $trip_id =  $conexao-> lastInsertId();
 
   header("Location: sucesso.html");
 
