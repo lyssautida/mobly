@@ -8,9 +8,9 @@
 
   // 2- variável sql recebe um comando insert, select ou query
   // insert into precisa ter os nomes da colunas do banco, values pode passar qualquer nome  
-  $buscar_cadastros = "SELECT * FROM trips, user_trips, users 
-                      WHERE user_trips.user_id = user.id
-                      WHERE user_trips.trip_id = trip.id"
+  $buscar_cadastros = "SELECT * FROM trips
+                      INNER JOIN user_trips ON user_trips.trip_id = trips.id
+                      INNER JOIN users ON user_trips.user_id = users.id";
 
   // 3- statment vai preparar a query
   $stmt = $conexao -> prepare($buscar_cadastros);
@@ -20,7 +20,6 @@
 
   // 5- receber os dados do statment
   $receber_cadastros = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-  var_dump($receber_cadastros);
 ?>
  
 <!DOCTYPE html>
@@ -70,9 +69,6 @@
 
             <?php
               
-              $_SESSION['viagem'];
-              //require 'form-viagem.php';
-
               foreach($receber_cadastros as $item) {
                 $id       = $item['id'];
                 $nome     = $item['nome'];
@@ -95,9 +91,9 @@
                 $table.='</thead>';              //fecha cabeçalho
                 $table.='<tbody>'; //abre corpo da tabela
                 $table.='<tr>'; // abre linha
-                $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
-                $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
+                $table.='<td>' .$nome. '</td>'; // coluna nome valor
+                $table.='<td>' .$partida. '</td>';
+                $table.='<td>' .$destino. '</td>';
                 $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
                 $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
                 $table.='<td>'.'<input type="checkbox" name="travel01" />'.'</td>';

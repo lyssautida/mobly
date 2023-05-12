@@ -25,14 +25,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar usuário</title>
+    <style>
+      p {
+        display: flex;
+        margin: 1rem;
+        color:  rgb(52, 69, 112);
+      }
+    </style>
   </head>
   <body>
 
     <div class="container">
       <table class="table">
+        <h3>Obrigada por se cadastrarem!</h3>
         <thead>
           <tr>
-            <th>Obrigada por se cadastrarem!</th>
+            <th></th>
           </tr>
         </thead>
         
@@ -51,6 +59,7 @@
 
           <tr>
             <td scope="row"><?php echo $nome; ?></td>
+            <td            ><?php echo $cidade; ?></td>
             <td            ><?php echo $estado; ?></td>
           </tr>
 
