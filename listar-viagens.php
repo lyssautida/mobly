@@ -20,6 +20,7 @@
 
   // 5- receber os dados do statment
   $receber_cadastros = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+  var_dump($receber_cadastros);
 ?>
  
 <!DOCTYPE html>
@@ -70,55 +71,47 @@
             <?php
               
               foreach($receber_cadastros as $item) {
-                $id       = $item['id'];
-                $nome     = $item['nome'];
-                $email    = $item['email'];
-                $telefone = $item['telefone'];
-                $cidade   = $item['cidade'];
-                $estado   = $item['estado'];
+                $viagem_id        = $item['trip_id'];
+                $user_id          = $item['user_id'];
+                $nome             = $item['nome'];
+                $email            = $item['email'];
+                $telefone         = $item['telefone'];
+                $cidade           = $item['cidade'];
+                $estado           = $item['estado'];
+                $local_partida    = $item['local_partida'];
+                $local_destino    = $item['local_destino'];
+                $data_partida     = $item['data_partida'];
+                $hora_partida     = $item['hora_partida'];
+                $data_destino     = $item['data_destino'];
+                $vagas            = $item['vagas'];
+                $is_passenger     = $item['is_passenger'];
                 
                 #table
                 $table='<table border="1">'; //cria tabela
                 $table.='<thead>'; //abre cabeçalho
                 $table.='<tr>'; // abre linha
-                $table.='<th>Nome</th>'; // colunas do cabeçalho
-                $table.='<th>Partida</th>';
-                $table.='<th>Horário</th>';
-                $table.='<th>Destino</th>';
-                $table.='<th>Vagas</th>';
+                $table.='<th>Nome Motorista</th>'; // colunas do cabeçalho
+                $table.='<th>Local de Partida</th>';
+                $table.='<th>Local de Destino</th>';
+                $table.='<th>Data de Partida</th>';
+                $table.='<th>Data de Chegada</th>';
                 $table.='<th>Selecionar</th>';
                 $table.='</tr>';                //fecha linha
                 $table.='</thead>';              //fecha cabeçalho
                 $table.='<tbody>'; //abre corpo da tabela
                 $table.='<tr>'; // abre linha
                 $table.='<td>' .$nome. '</td>'; // coluna nome valor
-                $table.='<td>' .$partida. '</td>';
-                $table.='<td>' .$destino. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
+                $table.='<td>' .$local_partida . '</td>';
+                $table.='<td>' .$local_destino. '</td>';
+                $table.='<td>' .$data_partida. '</td>';
+                $table.='<td>' .$data_destino. '</td>';
                 $table.='<td>'.'<input type="checkbox" name="travel01" />'.'</td>';
-                $table.='</tr>';                //fecha linha
-                $table.='<tr>'; // abre linha
-                $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
-                $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
-                $table.='<td>'.'<input type="checkbox" name="travel02" />'.'</td>';
-                $table.='</tr>';                //fecha linha
-                $table.='<tr>'; // abre linha
-                $table.='<td>' .$_SESSION["viagem"]["nome"]. '</td>'; // coluna nome valor
-                $table.='<td>' .$_SESSION['viagem']['partida']. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['destino']. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['horario']. '</td>';
-                $table.='<td>' .$_SESSION['viagem']['vagas']. '</td>';
-                $table.='<td>'.'<input type="checkbox" name="travel03" />'.'</td>';
                 $table.='</tr>';                //fecha linha
                 $table.='</tbody>';             //fecha corpo da tabela
                 $table.='</table>';             //fecha tabela
               }
 
-              if($_SESSION['viagem'] != null) {
+              if($receber_cadastros != null) {
                 echo $table;
               } else {
                 echo "Não há viagens na lista ainda.";
