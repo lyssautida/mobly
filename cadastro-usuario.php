@@ -34,7 +34,7 @@
     $erro = TRUE;
   }
 
-  if(!strstr($senha, $senha2)) {
+  if(!strstr($senha, $senhaConfirmacao)) {
     echo "As senhas devem ser iguais";
     $erro = TRUE;
   }
