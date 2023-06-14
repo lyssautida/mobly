@@ -85,13 +85,15 @@ if(!$erro) {
   // 2- variável sql recebe um comando insert, select ou query
   // insert into precisa ter os nomes da colunas do banco, values pode passar qualquer nome  
   $sql_trip = "INSERT INTO trips (local_partida, local_destino, data_partida, hora_partida, data_destino, vagas)
-          VALUES (:local_partida, :local_destino, :data_partida, :hora_partida, :data_destino, :vagas);
-          INSERT INTO user_trips (user_id, trip_id, is_passenger)
-          VALUES (:user_id, :trip_id, :is_passenger)";
+                    VALUES (:local_partida, :local_destino, :data_partida, :hora_partida, :data_destino, :vagas);
+              INSERT INTO user_trips (user_id, trip_id, is_passenger)
+                    VALUES (:user_id, :trip_id, :is_passenger)";
 
 // 3- statment vai preparar a query
   $stmt = $conexao -> prepare($sql_trip);
 
+  //pegar ultimo id criado
+  $trip_id =  $conexao-> lastInsertId();
 
   // 4- statment vai relacionar os parâmetros com os valores dinâmicos da variáveis do form
   $stmt -> bindValue(':user_id', $user_id);
@@ -100,7 +102,6 @@ if(!$erro) {
   $stmt -> bindValue(':data_partida', $data_partida);
   $stmt -> bindValue(':hora_partida', $hora_partida);
   $stmt -> bindValue(':data_destino', $data_destino);
-  $stmt -> bindValue(':vagas', $vagas);
   $stmt -> bindValue(':trip_id', $trip_id);
   $stmt -> bindValue(':is_passenger', $is_passenger);
   $stmt -> bindValue(':vagas', $vagas);
@@ -108,8 +109,6 @@ if(!$erro) {
   // 5- executar statment
   $stmt->execute();
 
-  //pegar ultimo id criado
-  $trip_id =  $conexao-> lastInsertId();
 
   header("Location: sucesso.html");
 
