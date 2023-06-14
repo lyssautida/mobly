@@ -20,7 +20,6 @@
 
   // 5- receber os dados do statment
   $receber_cadastros = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-  var_dump($receber_cadastros);
 ?>
  
 <!DOCTYPE html>
