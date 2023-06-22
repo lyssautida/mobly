@@ -21,6 +21,8 @@
         include "listar-viagens.php";
     } else if($pagina == "login") {
         include "login.html";
+    } else if ($pagina == 'api-usuarios') {
+        header ("Location: rota-usuarios-json.php");
     } else {
         include 'home.php';
     }
